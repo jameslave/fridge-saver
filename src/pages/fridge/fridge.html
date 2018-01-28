@@ -1,0 +1,50 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Fridge</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-card *ngFor="let food of foods">
+
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="assets/icon/food/{{ food.Icon }}.svg">
+      </ion-avatar>
+      <h2>{{ food.Name }}</h2>
+      <p>Bought {{ food.PurchaseDate | amFromUnix | amTimeAgo }}</p>
+    </ion-item>
+
+    <ion-row>
+      <ion-col>
+        <button ion-button
+                clear
+                small>
+          Use
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button
+                icon-left
+                clear
+                small>
+          <ion-icon name="text"></ion-icon>
+          <div>4 Comments</div>
+        </button>
+      </ion-col>
+      <ion-col center
+               text-center>
+        <ion-note>
+          11h ago
+        </ion-note>
+      </ion-col>
+    </ion-row>
+
+
+  </ion-card>
+
+</ion-content>
