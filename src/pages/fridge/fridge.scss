@@ -1,3 +1,15 @@
 page-fridge {
+  .empty-fridge-content {
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    filter: opacity(30%);
 
+    img {
+      max-width: 50%;
+    }
+  }
 }

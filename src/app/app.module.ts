@@ -13,12 +13,14 @@ import { FridgePageModule } from '../pages/fridge/fridge.module';
 import { RecipesPageModule } from '../pages/recipes/recipes.module';
 import { SettingsPageModule } from '../pages/settings/settings.module';
 import { LoginPage } from '../pages/login/login';
+import { FoodCardComponent } from '../components/food-card/food-card';
 
 @NgModule({
   declarations: [
     MyApp,
     LoginPage,
     TabsPage,
+    FoodCardComponent,
   ],
   imports: [
     BrowserModule,

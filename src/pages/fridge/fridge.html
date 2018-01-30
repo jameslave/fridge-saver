@@ -1,13 +1,13 @@
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="secondary">
     <ion-title>Fridge</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content *ngIf="foods.length" padding>
 
   <ion-card *ngFor="let food of foods">
 
@@ -21,30 +21,35 @@
 
     <ion-row>
       <ion-col>
-        <button ion-button
-                clear
-                small>
+        <button ion-button clear small>
           Use
         </button>
       </ion-col>
       <ion-col>
-        <button ion-button
-                icon-left
-                clear
-                small>
+        <button ion-button icon-left clear small>
           <ion-icon name="text"></ion-icon>
           <div>4 Comments</div>
         </button>
       </ion-col>
-      <ion-col center
-               text-center>
+      <ion-col center text-center>
         <ion-note>
           11h ago
         </ion-note>
       </ion-col>
     </ion-row>
 
-
   </ion-card>
 
+</ion-content>
+
+<ion-content *ngIf="!foods.length" padding>
+  <div class="empty-fridge-content">
+    <img src="assets/icon/food/Dragon Fruit.svg">
+    <h3>Your fridge is empty! Start adding foods below.</h3>
+  </div>
+  <ion-fab center bottom>
+    <button ion-fab color="primary">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>

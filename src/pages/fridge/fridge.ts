@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import { FoodsProvider } from '../../providers/foods/foods';
 import { Food } from '../../models/food';
+import { FoodCardComponent } from '../../components/food-card/food-card';
 
 @IonicPage()
 @Component({
