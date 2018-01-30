@@ -18,16 +18,12 @@ export class LoginPage {
   };
 
   constructor(
-    public navCtrl: NavController,
-    public navParams: NavParams,
-    public http: HttpClient,
-    public storage: Storage,
-    public toastCtrl: ToastController,
+    private navCtrl: NavController,
+    private navParams: NavParams,
+    private http: HttpClient,
+    private storage: Storage,
+    private toastCtrl: ToastController,
   ) { }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-  }
 
   login() {
     this.http.post('http://10.0.2.2:3000/auth/login', this.userInput, { observe: 'response' })

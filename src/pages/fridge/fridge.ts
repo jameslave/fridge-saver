@@ -14,22 +14,24 @@ export class FridgePage {
   foods: Food[];
 
   constructor(
-    public navCtrl: NavController,
-    public navParams: NavParams,
-    public http: HttpClient,
-    public foodsProvider: FoodsProvider,
-    public events: Events,
+    private navCtrl: NavController,
+    private navParams: NavParams,
+    private http: HttpClient,
+    private foodsProvider: FoodsProvider,
+    private events: Events,
   ) {
     this.foods = this.foodsProvider.foods;
     this.events.subscribe('foods:updated', (foods: Food[]) => {
       this.foods = foods;
-      console.log('foods: ', JSON.stringify(foods));
     });
   }
 
   ionViewWillEnter() {
     this.foodsProvider.getFoods();
-    console.log('Entered fridge page');
+  }
+
+  ionViewWillLeave() {
+    this.events.unsubscribe('foods:updated');
   }
 
 }
