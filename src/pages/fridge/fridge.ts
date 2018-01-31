@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
+import { App, IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import { FoodsProvider } from '../../providers/foods/foods';
 import { Food } from '../../models/food';
-import { FoodCardComponent } from '../../components/food-card/food-card';
+import { AddFoodPage } from '../add-food/add-food';
 
 @IonicPage()
 @Component({
@@ -17,9 +17,9 @@ export class FridgePage {
   constructor(
     private navCtrl: NavController,
     private navParams: NavParams,
-    private http: HttpClient,
     private foodsProvider: FoodsProvider,
     private events: Events,
+    private app: App,
   ) {
     this.foods = this.foodsProvider.foods;
     this.events.subscribe('foods:updated', (foods: Food[]) => {
@@ -27,12 +27,17 @@ export class FridgePage {
     });
   }
 
-  ionViewWillEnter() {
+  ionViewWillEnter(): void {
     this.foodsProvider.getFoods();
   }
 
-  ionViewWillLeave() {
+  ionViewWillLeave(): void {
     this.events.unsubscribe('foods:updated');
+  }
+
+  onTapAddFood(): void {
+    // show AddFoodPage on top of tabs
+    this.app.getRootNav().push(AddFoodPage);
   }
 
 }

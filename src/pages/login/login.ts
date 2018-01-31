@@ -26,7 +26,7 @@ export class LoginPage {
   ) { }
 
   login() {
-    this.http.post('http://10.0.2.2:3000/auth/login', this.userInput, { observe: 'response' })
+    this.http.post('http://localhost:3000/auth/login', this.userInput, { observe: 'response' })
       .subscribe(
       (res: HttpResponse<any>) => {
         const authHeader: string = res.headers.get('Authorization');

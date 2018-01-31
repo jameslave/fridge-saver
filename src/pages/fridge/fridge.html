@@ -1,6 +1,6 @@
 <ion-header>
 
-  <ion-navbar color="secondary">
+  <ion-navbar color="primary">
     <ion-title>Fridge</ion-title>
   </ion-navbar>
 
@@ -45,10 +45,11 @@
 <ion-content *ngIf="!foods.length" padding>
   <div class="empty-fridge-content">
     <img src="assets/icon/food/Dragon Fruit.svg">
-    <h3>Your fridge is empty! Start adding foods below.</h3>
+    <h3>Your fridge is empty!</h3>
+    <p>Start adding foods below.</p>
   </div>
   <ion-fab center bottom>
-    <button ion-fab color="primary">
+    <button ion-fab color="secondary" (tap)="onTapAddFood()">
       <ion-icon name="add"></ion-icon>
     </button>
   </ion-fab>

@@ -11,9 +11,9 @@ export class FoodsProvider {
   public foods: Food[] = [];
 
   constructor(
-    public http: HttpClient,
-    public storage: Storage,
-    public events: Events,
+    private http: HttpClient,
+    private storage: Storage,
+    private events: Events,
   ) { }
 
   getToken(): Promise<string> {
@@ -23,11 +23,16 @@ export class FoodsProvider {
     });
   }
 
-  createRequestWithToken(token): Promise<any> {
-    const req = this.http.get('http://10.0.2.2:3000/foods', {
-      headers: { Authorization: `Bearer ${token}` },
+  createRequestWithToken(url): Promise<any> {
+    return new Promise((resolve) => {
+      this.getToken()
+        .then((token) => {
+          const req = this.http.get(url, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          resolve(req);
+        });
     });
-    return Promise.resolve(req);
   }
 
   setFoodsFromRequest(req: Observable<Food[]>): Promise<Observable<Food[]>> {
@@ -41,11 +46,21 @@ export class FoodsProvider {
     return Promise.resolve(req);
   }
 
-  getFoods(): Promise<any> {
+  getFoods(): Promise<Observable<any>> {
+    const url = 'http://localhost:3000/foods';
+
     return new Promise((resolve) => {
-      this.getToken()
-        .then(this.createRequestWithToken.bind(this))
+      this.createRequestWithToken.call(this, url)
         .then(this.setFoodsFromRequest.bind(this))
+        .then(resolve);
+    });
+  }
+
+  searchFoods(query): Promise<Observable<any>> {
+    const url = `http://localhost:3000/foods/search?q=${query}`;
+
+    return new Promise((resolve) => {
+      this.createRequestWithToken.call(this, url)
         .then(resolve);
     });
   }

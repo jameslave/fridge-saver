@@ -12,8 +12,10 @@ import { FoodsProvider } from '../providers/foods/foods';
 import { FridgePageModule } from '../pages/fridge/fridge.module';
 import { RecipesPageModule } from '../pages/recipes/recipes.module';
 import { SettingsPageModule } from '../pages/settings/settings.module';
+import { AddFoodPageModule } from '../pages/add-food/add-food.module';
 import { LoginPage } from '../pages/login/login';
 import { FoodCardComponent } from '../components/food-card/food-card';
+import { AddFoodPage } from '../pages/add-food/add-food';
 
 @NgModule({
   declarations: [
@@ -30,12 +32,14 @@ import { FoodCardComponent } from '../components/food-card/food-card';
     FridgePageModule,
     RecipesPageModule,
     SettingsPageModule,
+    AddFoodPageModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     LoginPage,
     TabsPage,
+    AddFoodPage,
   ],
   providers: [
     StatusBar,

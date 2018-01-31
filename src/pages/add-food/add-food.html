@@ -1,0 +1,48 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Add Food</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-searchbar #searchBar
+    spellcheck="true"
+    (ionInput)="searchFoods($event)"></ion-searchbar>
+
+  <ion-list>
+    <ion-item *ngFor="let food of matchingFoods"
+      (tap)="selectFood(food)">
+      {{ food.name }}
+      <p>{{ food.subtitle }}</p>
+    </ion-item>
+  </ion-list>
+
+  <ion-list padding>
+
+    <ion-item>
+      <ion-input type="text"
+        placeholder="Name"
+        [value]="selectedFood ? selectedFood.name : ''"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="text"
+        placeholder="Description (optional)"
+        [value]="selectedFood && selectedFood.subtitle ? selectedFood.subtitle : ''"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-datetime displayFormat="MM/DD/YYYY"
+        placeholder="Date"
+        [(ngModel)]="myDate"></ion-datetime>
+    </ion-item>
+
+    <p></p>
+
+  </ion-list>
+
+</ion-content>
