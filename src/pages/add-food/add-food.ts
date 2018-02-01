@@ -1,7 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events, PopoverController } from 'ionic-angular';
 import { Food } from '../../models/food';
 import { FoodsProvider } from '../../providers/foods/foods';
+import { SelectIconPage } from '../select-icon/select-icon';
 
 @IonicPage()
 @Component({
@@ -19,10 +20,11 @@ export class AddFoodPage {
     private navParams: NavParams,
     private foodsProvider: FoodsProvider,
     private events: Events,
+    private popoverCtrl: PopoverController,
   ) { }
 
   ionViewDidLoad() {
-    setTimeout(this.searchBar.setFocus, 1000);
+    setTimeout(() => this.searchBar.setFocus(), 1000);
   }
 
   searchFoods($event): void {
@@ -45,6 +47,10 @@ export class AddFoodPage {
     this.selectedFood = food;
     this.matchingFoods = [];
     this.searchBar.value = '';
+  }
+
+  showIcons() {
+    this.popoverCtrl.create(SelectIconPage).present();
   }
 
 }

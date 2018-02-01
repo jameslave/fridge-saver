@@ -13,16 +13,14 @@ import { FridgePageModule } from '../pages/fridge/fridge.module';
 import { RecipesPageModule } from '../pages/recipes/recipes.module';
 import { SettingsPageModule } from '../pages/settings/settings.module';
 import { AddFoodPageModule } from '../pages/add-food/add-food.module';
+import { SelectIconPageModule } from '../pages/select-icon/select-icon.module';
 import { LoginPage } from '../pages/login/login';
-import { FoodCardComponent } from '../components/food-card/food-card';
-import { AddFoodPage } from '../pages/add-food/add-food';
 
 @NgModule({
   declarations: [
     MyApp,
     LoginPage,
     TabsPage,
-    FoodCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,13 +31,13 @@ import { AddFoodPage } from '../pages/add-food/add-food';
     RecipesPageModule,
     SettingsPageModule,
     AddFoodPageModule,
+    SelectIconPageModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     LoginPage,
     TabsPage,
-    AddFoodPage,
   ],
   providers: [
     StatusBar,
