@@ -31,8 +31,7 @@ export class MyApp {
             this.rootPage = LoginPage;
           }
           splashScreen.hide();
-        })
-        .catch(err => console.log(err));
+        });
     });
   }
 }

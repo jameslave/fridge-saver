@@ -3,7 +3,7 @@ export interface Food {
   category: string;
   subcategory: string;
   name: string;
-  subtitle: string;
+  description: string;
   icon: string;
   pantry_open_min: number;
   pantry_open_max: number;

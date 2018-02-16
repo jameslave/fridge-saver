@@ -1,4 +1,24 @@
 page-add-food {
+  .searchbar-container {
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+  }
+
+  .searchbar-container > ion-list {
+    width: 100%;
+  }
+
+  .icon-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eee;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+  }
+
   ion-thumbnail {
     max-width: 80px;
   }
