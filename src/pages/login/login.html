@@ -1,34 +1,61 @@
-<ion-header>
+<ion-content scroll="false">
+  <div class="login-container"
+    padding>
+    <div class="logo">
+      <h1>Fridge Saver</h1>
+    </div>
 
-  <ion-navbar>
-    <ion-title>Log In</ion-title>
-  </ion-navbar>
+    <div class="login-form flex"
+      padding>
+      <div>
+        <ion-item>
+          <ion-label floating>Email</ion-label>
+          <ion-input type="email"
+            [(ngModel)]="userInput.email"></ion-input>
+        </ion-item>
 
-</ion-header>
+        <ion-item>
+          <ion-label floating>Password</ion-label>
+          <ion-input type="password"
+            [(ngModel)]="userInput.password"></ion-input>
+        </ion-item>
+      </div>
 
+      <button class="login-btn mt-2"
+        ion-button
+        block
+        (tap)="onLogin()">Log in</button>
 
-<ion-content padding>
+      <div class="social-btn-container mt-2">
+        <button class="social-btn"
+          color="google"
+          ion-button
+          block
+          icon-left
+          (click)="loginGoogle()">
+          <ion-icon name="logo-googleplus"></ion-icon>
+          Continue with Google
+        </button>
 
-  <ion-list>
+        <button class="social-btn"
+          color="facebook"
+          ion-button
+          block
+          icon-left
+          (click)="loginFacebook()">
+          <ion-icon name="logo-facebook"></ion-icon>
+          Continue with Facebook
+        </button>
+      </div>
 
-    <ion-item>
-      <ion-label floating>Email</ion-label>
-      <ion-input type="text"
-                 [(ngModel)]="userInput.email"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label floating>Password</ion-label>
-      <ion-input type="password"
-                 [(ngModel)]="userInput.password"></ion-input>
-    </ion-item>
-
-  </ion-list>
-
-  <div padding>
-    <button ion-button
-            block
-            (tap)="login()">Log in</button>
+      <div class="link-container flex mt-2">
+        <button class="link"
+          ion-button
+          clear>Forgot password?</button>
+        <button class="link"
+          ion-button
+          clear>New? Sign up!</button>
+      </div>
+    </div>
   </div>
-
 </ion-content>

@@ -25,22 +25,22 @@ export class LoginPage {
     private toastCtrl: ToastController,
   ) { }
 
-  login() {
+  onLogin() {
     this.http.post('http://localhost:3000/auth/login', this.userInput, { observe: 'response' })
       .subscribe(
-      (res: HttpResponse<any>) => {
-        const authHeader: string = res.headers.get('Authorization');
-        const token: string = authHeader.split(' ')[1];
-        this.storage.set('token', token).then(() => this.navCtrl.setRoot(TabsPage));
-      },
-      (err: HttpErrorResponse) => {
-        const message: string = err.error;
-        const toast = this.toastCtrl.create({
-          message,
-          duration: 4000,
-        });
-        toast.present();
-      },
+        (res: HttpResponse<any>) => {
+          const authHeader: string = res.headers.get('Authorization');
+          const token: string = authHeader.split(' ')[1];
+          this.storage.set('token', token).then(() => this.navCtrl.setRoot(TabsPage));
+        },
+        (err: HttpErrorResponse) => {
+          const message: string = err.error;
+          const toast = this.toastCtrl.create({
+            message,
+            duration: 4000,
+          });
+          toast.present();
+        },
     );
   }
 
