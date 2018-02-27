@@ -44,4 +44,12 @@ export class LoginPage {
     );
   }
 
+  onLoginGoogle() {
+
+  }
+
+  onLoginFacebook() {
+
+  }
+
 }

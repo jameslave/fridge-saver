@@ -1,12 +1,13 @@
 <ion-content scroll="false">
   <div class="login-container"
     padding>
-    <div class="logo">
-      <h1>Fridge Saver</h1>
-    </div>
+
 
     <div class="login-form flex"
       padding>
+      <div class="logo">
+        <h1>Fridge Saver</h1>
+      </div>
       <div>
         <ion-item>
           <ion-label floating>Email</ion-label>
@@ -22,6 +23,7 @@
       </div>
 
       <button class="login-btn mt-2"
+        color="secondary"
         ion-button
         block
         (tap)="onLogin()">Log in</button>
@@ -32,7 +34,7 @@
           ion-button
           block
           icon-left
-          (click)="loginGoogle()">
+          (click)="onLoginGoogle()">
           <ion-icon name="logo-googleplus"></ion-icon>
           Continue with Google
         </button>
@@ -42,20 +44,20 @@
           ion-button
           block
           icon-left
-          (click)="loginFacebook()">
+          (click)="onLoginFacebook()">
           <ion-icon name="logo-facebook"></ion-icon>
           Continue with Facebook
         </button>
       </div>
 
-      <div class="link-container flex mt-2">
+      <!-- <div class="link-container flex mt-2">
         <button class="link"
           ion-button
           clear>Forgot password?</button>
         <button class="link"
           ion-button
           clear>New? Sign up!</button>
-      </div>
+      </div> -->
     </div>
   </div>
 </ion-content>
