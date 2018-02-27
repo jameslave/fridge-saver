@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
+import { IonicPage, NavController, Events } from 'ionic-angular';
 import { Food } from '../../models/food';
 import { FoodsProvider } from '../../providers/foods/foods';
 import { SelectIconPage } from '../select-icon/select-icon';
@@ -15,27 +15,25 @@ export class AddFoodPage {
 
   matchingFoodTemplates: Food[];
   selectedFoodTemplate: Food;
-  possibleLocations: string[];
-  userInput = {
-    icon: '',
-    name: '',
-    description: '',
-    purchased: moment().format(),
-    location: null,
-    exp_min: null,
+  possibleLocations: string[] = ['pantry', 'fridge', 'freezer'];
+  userInputDefault = {
+    icon: <string>'',
+    name: <string>'',
+    description: <string>'',
+    purchaseDate: <string>moment().format(),
+    expDate: <string>'',
+    expDuration: <number>0, // seconds
+    location: <string>'',
   };
-  maxDate: string;
+  userInput = { ...this.userInputDefault };
+  maxPurchaseDate: string = moment().format();
 
   constructor(
     private navCtrl: NavController,
-    private navParams: NavParams,
     private foodsProvider: FoodsProvider,
     private events: Events,
   ) {
-    this.events.subscribe('icon:changed', (icon) => {
-      this.userInput.icon = icon.name;
-    });
-    this.maxDate = moment().format();
+    this.events.subscribe('icon:changed', (icon: string) => this.userInput.icon = icon);
   }
 
   ionViewDidLoad() {
@@ -62,16 +60,12 @@ export class AddFoodPage {
 
   setPossibleLocations(food: Food) {
     const locationsList = [];
-    if (food.pantry_new_min || food.pantry_new_max) {
-      locationsList.push('pantry');
-    }
-    if (food.fridge_new_min || food.fridge_new_max) {
-      locationsList.push('fridge');
-    }
-    if (food.freeze_min || food.freeze_max) {
-      locationsList.push('freeze');
-    }
-    this.possibleLocations = locationsList;
+    if (food.pantry_new_min || food.pantry_new_max) locationsList.push('pantry');
+    if (food.fridge_new_min || food.fridge_new_max) locationsList.push('fridge');
+    if (food.freezer_min || food.freezer_max) locationsList.push('freezer');
+
+    // only reset possible locations if list has at least one option
+    if (locationsList.length) this.possibleLocations = locationsList;
   }
 
   selectFood(food: Food) {
@@ -82,18 +76,39 @@ export class AddFoodPage {
     this.userInput.icon = food.icon || '';
     this.userInput.name = food.name || '';
     this.userInput.description = food.description || '';
-    this.userInput.location = null;
+    this.userInput.location = '';
+  }
+
+  onLocationChange() {
+    const { location: newLocation } = this.userInput;
+    let expirationIndex;
+
+    if (newLocation === 'freezer') {
+      expirationIndex = `${newLocation}_min`;
+    } else {
+      expirationIndex = `${newLocation}_new_min`;
+    }
+
+    // set expiration duration according to selected location
+    if (this.selectedFoodTemplate) {
+      this.userInput.expDuration = this.selectedFoodTemplate[expirationIndex] || null;
+    } else {
+      this.userInput.expDuration = null;
+    }
+
+    this.setExpirationDate();
+  }
+
+  setExpirationDate() {
+    const { purchaseDate, expDuration } = this.userInput;
+
+    if (expDuration) {
+      this.userInput.expDate = moment(purchaseDate).add(expDuration, 's').format();
+    }
   }
 
   clearUserInput() {
-    this.userInput = {
-      icon: '',
-      name: '',
-      description: '',
-      purchased: moment().format(),
-      location: null,
-      exp_min: null,
-    };
+    this.userInput = { ...this.userInputDefault };
   }
 
   showIcons() {

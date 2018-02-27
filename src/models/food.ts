@@ -13,6 +13,6 @@ export interface Food {
   fridge_open_max: number;
   fridge_new_min: number;
   fridge_new_max: number;
-  freeze_min: number;
-  freeze_max: number;
+  freezer_min: number;
+  freezer_max: number;
 }

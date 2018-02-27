@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
+import { IonicPage, NavController, Events } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
+import iconsList from '../../assets/icons/foods/iconsList';
 
 @IonicPage()
 @Component({
@@ -9,8 +10,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SelectIconPage {
 
-  iconFiles: { name: string; file: string }[];
-  filteredIconFiles: Object[] = [];
+  iconsList: string[] = iconsList;
+  filteredIconsList: string[] = this.iconsList;
 
   constructor(
     private navCtrl: NavController,
@@ -18,30 +19,16 @@ export class SelectIconPage {
     private events: Events,
   ) { }
 
-  // load list of available icons from server
-  ionViewWillEnter() {
-    this.http.get('http://localhost:3000/icons')
-      .subscribe(
-      (icons: string) => {
-        this.iconFiles = JSON.parse(icons);
-        this.filteredIconFiles = this.iconFiles;
-      },
-      (err) => {
-        console.error(err);
-      },
-    );
-  }
-
   filterIcons($event) {
-    const query = $event.target.value;
+    const query: string = $event.target.value;
     if (query && query.trim() !== '') {
-      this.filteredIconFiles = this.iconFiles.filter(file => file.name.includes(query));
+      this.filteredIconsList = this.iconsList.filter((file: string) => file.includes(query));
     } else {
-      this.filteredIconFiles = this.iconFiles;
+      this.filteredIconsList = this.iconsList;
     }
   }
 
-  onSelectIcon(icon) {
+  onSelectIcon(icon: string) {
     this.events.publish('icon:changed', icon);
     this.navCtrl.pop();
   }

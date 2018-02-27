@@ -10,8 +10,8 @@
 
   <ion-searchbar (ionInput)="filterIcons($event)"></ion-searchbar>
 
-  <img *ngFor="let icon of filteredIconFiles"
-    src="http://localhost:3000/icons/{{ icon.file }}"
+  <img *ngFor="let icon of filteredIconsList"
+    src="assets/icons/foods/{{ icon }}.svg"
     (tap)="onSelectIcon(icon)">
 
 </ion-content>

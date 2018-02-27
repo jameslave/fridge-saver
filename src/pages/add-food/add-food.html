@@ -56,22 +56,25 @@
     <ion-item>
       <ion-label stacked>Purchase date</ion-label>
       <ion-datetime displayFormat="M/D/YYYY"
-        [max]="maxDate"
-        [(ngModel)]="userInput.purchased"></ion-datetime>
+        [max]="maxPurchaseDate"
+        [(ngModel)]="userInput.purchaseDate"></ion-datetime>
     </ion-item>
 
     <ion-item>
       <ion-label stacked>Location</ion-label>
-      <ion-select [(ngModel)]="userInput.location">
+      <ion-select [(ngModel)]="userInput.location"
+        (ionChange)="onLocationChange()">
         <ion-option *ngFor="let location of possibleLocations"
-          value="location">{{ location.slice(0, 1).toUpperCase() + location.slice(1) }}</ion-option>
+          [value]="location">
+          {{ location | capitalize }}
+        </ion-option>
       </ion-select>
     </ion-item>
 
     <ion-item *ngIf="userInput.location">
       <ion-label stacked>Best by</ion-label>
       <ion-datetime displayFormat="M/D/YYYY"
-        [(ngModel)]="userInput.exp_min"></ion-datetime>
+        [(ngModel)]="userInput.expDate"></ion-datetime>
     </ion-item>
 
     <ion-row margin-top>
